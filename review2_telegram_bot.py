@@ -8,6 +8,7 @@ from aiogram.utils import executor
 import logging
 import os
 from PIL import Image
+import style_transfer
 
 class States(StatesGroup):
     STATE_0 = State()
@@ -19,7 +20,7 @@ class States(StatesGroup):
 
 
 TG_TOKEN = os.getenv("TELEGRAM_API_TOKEN")
-TG_TOKEN = "1021175427:AAHexMUwuLN5dq-fl6yXTc1Uk5jhi2karbY" # my token, use your please
+TG_TOKEN = "7769448280:AAGd1tJy41J93Uhu5oS8Rvm8mD-mBMIRMRo" # my token, use your please
 
 QUALITY = {
     1: '128x128',
@@ -131,11 +132,11 @@ async def output_handler(callback_query: types.CallbackQuery):
     elif setting == 4:
         await bot.send_message(chat_id=chat_id, text='Пожалуйста, подождите. (~60 минут)')
     
-    #style_transfer.style_transfer('file_0.jpg', 'file_1.jpg', imsize=64 * 2 ** setting, num_steps=300, start_with_white_noise=False)
+    style_transfer.style_transfer('file_0.jpg', 'file_1.jpg', imsize=64 * 2 ** setting, num_steps=300, start_with_white_noise=False)
     print('------style transfered------')
     
-    #photo = open('file_2.jpg', 'rb')
-    photo = open('file_0.jpg', 'rb')
+    photo = open('file_2.jpg', 'rb')
+    #photo = open('file_0.jpg', 'rb')
     await bot.send_photo(chat_id=chat_id, photo=photo, caption='Готово!')
     # Меняем состояние
     await States.next()
